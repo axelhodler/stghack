@@ -16,8 +16,6 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 
 
 @Path("/witchhunts")
@@ -26,13 +24,8 @@ public class WitchHuntResource {
 
 	private final DBCollection col;
 
-	public WitchHuntResource() throws UnknownHostException {
-		final MongoClientURI mongoUri = new MongoClientURI(
-				System.getenv("MONGO_URL"));
-		final MongoClient mongo = new MongoClient(mongoUri);
-
-		final DB killcount = mongo.getDB(System.getenv("DB_NAME"));
-		col = killcount.getCollection("witchhunts");
+	public WitchHuntResource(final DB db) throws UnknownHostException {
+		col = db.getCollection("witchhunts");
 	}
 
 	@GET

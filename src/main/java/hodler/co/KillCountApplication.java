@@ -1,9 +1,14 @@
 package hodler.co;
 
+import hodler.co.resources.DemocideResource;
 import hodler.co.resources.WitchHuntResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 
 public class KillCountApplication extends Application<KillCountConfiguration> {
@@ -15,14 +20,21 @@ public class KillCountApplication extends Application<KillCountConfiguration> {
 	@Override
 	public void initialize(final Bootstrap<KillCountConfiguration> arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void run(final KillCountConfiguration arg0, final Environment env) throws Exception {
-		final WitchHuntResource res = new WitchHuntResource();
+		final MongoClientURI mongoUri = new MongoClientURI(
+				System.getenv("MONGO_URL"));
+		final MongoClient mongo = new MongoClient(mongoUri);
 
-		env.jersey().register(res);
+		final DB killcount = mongo.getDB(System.getenv("DB_NAME"));
+
+		final WitchHuntResource witchHuntRes = new WitchHuntResource(killcount);
+		final DemocideResource demoCideRes = new DemocideResource(killcount);
+
+		env.jersey().register(witchHuntRes);
+		env.jersey().register(demoCideRes);
 	}
 
 }
