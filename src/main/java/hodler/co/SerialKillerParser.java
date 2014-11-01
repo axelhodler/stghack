@@ -53,13 +53,26 @@ public class SerialKillerParser {
 			k.setYearsActive(killerInfo.get(2).text());
 			k.setInfos(i);
 
+			String wikiLink = "";
+			if (killerInfo.get(0).getElementsByTag("a").size() > 0) {
+				wikiLink = "http://en.wikipedia.org" + getWikiLink(killerInfo);
+			} else {
+				//
+			}
+			k.setWikipediaLink(wikiLink);
+
 			serialKillerList.add(k);
 		}
 
 		for (final SerialKiller k : serialKillerList) {
 			col.insert(new BasicDBObject("region", k.getInfos().getRegion())
 					.append("lowestCasualties", k.getInfos().getLowestCasualties())
-					.append("yearsActive", k.getYearsActive()).append("name", k.getName()));
+					.append("yearsActive", k.getYearsActive()).append("name", k.getName())
+					.append("link", k.getWikipediaLink()));
 		}
+	}
+
+	private static String getWikiLink(final Elements killerInfo) {
+		return killerInfo.get(0).getElementsByTag("a").get(0).attr("href");
 	}
 }

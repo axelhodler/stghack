@@ -59,7 +59,7 @@ public class MedicalKillerParser {
 			if (killerInfo.get(3).text().endsWith("+")) {
 				final String info = killerInfo.get(3).text();
 				lowestCasualties = Integer.parseInt(info.replace("+", ""));
-			} else if (killerInfo.get(3).text().contains("–")){
+			} else if (killerInfo.get(3).text().contains("–")) {
 				final String[] possibleCasualties = killerInfo.get(3).text().split("–");
 				lowestCasualties = Integer.parseInt(possibleCasualties[1]);
 			} else {
@@ -69,15 +69,27 @@ public class MedicalKillerParser {
 
 			k.setYearsActive(killerInfo.get(2).text());
 			k.setInfos(i);
-			
+
+			String wikiLink = "";
+			if (killerInfo.get(0).getElementsByTag("a").size() > 0) {
+				wikiLink = "http://en.wikipedia.org" + getWikiLink(killerInfo);
+			} else {
+				//
+			}
+			k.setWikipediaLink(wikiLink);
 			serialKillerList.add(k);
 		}
 
 		for (final SerialKiller k : serialKillerList) {
 			col.insert(new BasicDBObject("region", k.getInfos().getRegion())
 					.append("lowestCasualties", k.getInfos().getLowestCasualties())
-					.append("yearsActive", k.getYearsActive()).append("name", k.getName()));
+					.append("yearsActive", k.getYearsActive()).append("name", k.getName())
+					.append("link", k.getWikipediaLink()));
 		}
+	}
+
+	private static String getWikiLink(final Elements killerInfo) {
+		return killerInfo.get(0).getElementsByTag("a").get(0).attr("href");
 	}
 
 	private static String parseName(final Elements killerInfo) {

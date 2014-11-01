@@ -45,6 +45,7 @@ public class SerialKillerResource {
 			sk.setInfos(entityInfos);
 			sk.setName(dbo.get("name").toString());
 			sk.setYearsActive(dbo.get("yearsActive").toString());
+			sk.setWikipediaLink(dbo.get("link").toString());
 
 			serialKillers.add(sk);
 		}

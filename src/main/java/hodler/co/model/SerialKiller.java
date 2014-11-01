@@ -9,6 +9,7 @@ public class SerialKiller {
 	private EntityInfos infos;
 	private String name;
 	private String yearsActive;
+	private String wikipediaLink;
 
 	public SerialKiller() {
 	}
@@ -37,5 +38,11 @@ public class SerialKiller {
 		this.name = name;
 	}
 
+	public String getWikipediaLink() {
+		return wikipediaLink;
+	}
 
+	public void setWikipediaLink(final String wikipediaLink) {
+		this.wikipediaLink = wikipediaLink;
+	}
 }
