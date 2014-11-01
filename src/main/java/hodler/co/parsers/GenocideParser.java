@@ -3,6 +3,7 @@ package hodler.co.parsers;
 import hodler.co.model.EntityInfos;
 import hodler.co.model.Genocide;
 import hodler.co.model.HistoricalRange;
+import hodler.co.parsers.utils.ParsedInfoStorage;
 
 import java.io.IOException;
 import java.util.ArrayList;

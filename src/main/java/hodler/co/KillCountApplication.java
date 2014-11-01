@@ -2,6 +2,7 @@ package hodler.co;
 
 import hodler.co.resources.GenocideResource;
 import hodler.co.resources.SerialKillerResource;
+import hodler.co.resources.TerroristAttacksResource;
 import hodler.co.resources.WitchHuntResource;
 import hodler.co.utils.EnvVars;
 import io.dropwizard.Application;
@@ -35,10 +36,12 @@ public class KillCountApplication extends Application<KillCountConfiguration> {
 		final WitchHuntResource witchHuntRes = new WitchHuntResource(killcount);
 		final GenocideResource demoCideRes = new GenocideResource(killcount);
 		final SerialKillerResource serialKillerRes = new SerialKillerResource(killcount);
+		final TerroristAttacksResource taRes = new TerroristAttacksResource(killcount);
 
 		env.jersey().register(witchHuntRes);
 		env.jersey().register(demoCideRes);
 		env.jersey().register(serialKillerRes);
+		env.jersey().register(taRes);
 	}
 
 }

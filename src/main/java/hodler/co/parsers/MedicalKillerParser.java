@@ -2,6 +2,7 @@ package hodler.co.parsers;
 
 import hodler.co.model.EntityInfos;
 import hodler.co.model.SerialKiller;
+import hodler.co.parsers.utils.ParsedInfoStorage;
 import hodler.co.utils.Collections;
 
 import java.io.IOException;

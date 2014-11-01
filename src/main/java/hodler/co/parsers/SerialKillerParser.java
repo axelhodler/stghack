@@ -2,6 +2,7 @@ package hodler.co.parsers;
 
 import hodler.co.model.EntityInfos;
 import hodler.co.model.SerialKiller;
+import hodler.co.parsers.utils.ParsedInfoStorage;
 import hodler.co.utils.Collections;
 
 import java.io.IOException;
@@ -17,8 +18,6 @@ import org.jsoup.select.Elements;
 public class SerialKillerParser {
 
 	public static void main(final String[] args) throws IOException {
-		
-
 		final Document doc =
 				Jsoup.connect("http://en.wikipedia.org/wiki/List_of_serial_killers_by_number_of_victims").get();
 

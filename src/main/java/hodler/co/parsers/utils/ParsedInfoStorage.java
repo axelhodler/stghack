@@ -1,7 +1,8 @@
-package hodler.co.parsers;
+package hodler.co.parsers.utils;
 
 import hodler.co.model.Genocide;
 import hodler.co.model.SerialKiller;
+import hodler.co.model.TerroristAttack;
 import hodler.co.utils.EnvVars;
 
 import java.net.UnknownHostException;
@@ -45,6 +46,17 @@ public class ParsedInfoStorage {
 					.append("to", gc.getTimeRange().getTo())
 					.append("event", gc.getInfos().getEvent())
 					.append("link", gc.getWikipediaLink()));
+		}
+	}
+
+	public void storeTerroristAttacks(final List<TerroristAttack> attacks) {
+		for (final TerroristAttack attack : attacks) {
+			col.insert(new BasicDBObject("region", attack.getEntityInfos().getRegion())
+					.append("lowestCasualties", attack.getEntityInfos().getLowestCasualties())
+					.append("year", attack.getYear())
+					.append("ideology", attack.getIdeology())
+					.append("event", attack.getEntityInfos().getEvent())
+					.append("link", attack.getWikipediaLink()));
 		}
 	}
 }
