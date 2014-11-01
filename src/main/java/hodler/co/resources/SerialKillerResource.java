@@ -49,6 +49,6 @@ public class SerialKillerResource {
 			serialKillers.add(sk);
 		}
 
-		return Response.ok().entity(serialKillers).build();
+		return Response.ok().header("Access-Control-Allow-Origin", "*").entity(serialKillers).build();
 	}
 }

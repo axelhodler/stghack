@@ -48,6 +48,6 @@ public class WitchHuntResource {
 			casualties.add(cas);
 		}
 
-		return Response.ok().entity(casualties).build();
+		return Response.ok().header("Access-Control-Allow-Origin", "*").entity(casualties).build();
 	}
 }
