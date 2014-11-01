@@ -31,7 +31,6 @@ public class GenocideResource {
 	}
 
 	@GET
-	@Path("/")
 	public Response getDemocides() {
 		final DBCursor curs = col.find();
 		final List<Genocide> casualties = new ArrayList<Genocide>();

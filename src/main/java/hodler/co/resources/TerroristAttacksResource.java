@@ -30,7 +30,6 @@ public class TerroristAttacksResource {
 	}
 
 	@GET
-	@Path("/")
 	public Response getTerroristAttacks() {
 		final DBCursor curs = col.find();
 		final List<TerroristAttack> terroristAttacks = new ArrayList<TerroristAttack>();

@@ -30,7 +30,6 @@ public class SerialKillerResource {
 	}
 
 	@GET
-	@Path("/")
 	public Response getWitchHuntCasualties() {
 		final DBCursor curs = col.find();
 		final List<SerialKiller> serialKillers = new ArrayList<SerialKiller>();

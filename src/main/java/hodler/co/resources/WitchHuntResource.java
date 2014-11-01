@@ -30,7 +30,6 @@ public class WitchHuntResource {
 	}
 
 	@GET
-	@Path("/")
 	public Response getWitchHuntCasualties() {
 		final DBCursor curs = col.find();
 		final List<EntityInfos> casualties = new ArrayList<EntityInfos>();
