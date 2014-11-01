@@ -2,6 +2,8 @@ package hodler.co;
 
 import hodler.co.model.EntityInfos;
 import hodler.co.model.SerialKiller;
+import hodler.co.parsers.ParsedInfoStorage;
+import hodler.co.utils.Collections;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,22 +14,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-
 
 public class SerialKillerParser {
 
 	public static void main(final String[] args) throws IOException {
-		final MongoClientURI mongoUri = new MongoClientURI(
-				System.getenv("MONGO_URL"));
-		final MongoClient mongo = new MongoClient(mongoUri);
-
-		final DB killcount = mongo.getDB(System.getenv("DB_NAME"));
-		final DBCollection col = killcount.getCollection("serialkillers");
+		
 
 		final Document doc =
 				Jsoup.connect("http://en.wikipedia.org/wiki/List_of_serial_killers_by_number_of_victims").get();
@@ -64,12 +55,8 @@ public class SerialKillerParser {
 			serialKillerList.add(k);
 		}
 
-		for (final SerialKiller k : serialKillerList) {
-			col.insert(new BasicDBObject("region", k.getInfos().getRegion())
-					.append("lowestCasualties", k.getInfos().getLowestCasualties())
-					.append("yearsActive", k.getYearsActive()).append("name", k.getName())
-					.append("link", k.getWikipediaLink()));
-		}
+		final ParsedInfoStorage storage = new ParsedInfoStorage(Collections.SERIAL_KILLERS);
+		storage.storeSerialKillers(serialKillerList);
 	}
 
 	private static String getWikiLink(final Elements killerInfo) {

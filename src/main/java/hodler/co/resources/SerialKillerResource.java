@@ -2,6 +2,7 @@ package hodler.co.resources;
 
 import hodler.co.model.EntityInfos;
 import hodler.co.model.SerialKiller;
+import hodler.co.utils.Collections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
+
 @Path("/serialkillers")
 @Produces(MediaType.APPLICATION_JSON)
 public class SerialKillerResource {
@@ -24,7 +26,7 @@ public class SerialKillerResource {
 	private final DBCollection col;
 
 	public SerialKillerResource(final DB db) {
-		col = db.getCollection("serialkillers");
+		col = db.getCollection(Collections.SERIAL_KILLERS);
 	}
 
 	@GET
@@ -37,7 +39,7 @@ public class SerialKillerResource {
 			final DBObject dbo = curs.next();
 
 			final SerialKiller sk = new SerialKiller();
-			
+
 			final EntityInfos entityInfos = new EntityInfos();
 			entityInfos.setId(dbo.get("_id").toString());
 			entityInfos.setLowestCasualties(((Number) dbo.get("lowestCasualties")).intValue());

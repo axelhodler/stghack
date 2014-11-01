@@ -3,6 +3,7 @@ package hodler.co;
 import hodler.co.resources.DemocideResource;
 import hodler.co.resources.SerialKillerResource;
 import hodler.co.resources.WitchHuntResource;
+import hodler.co.utils.EnvVars;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -26,10 +27,10 @@ public class KillCountApplication extends Application<KillCountConfiguration> {
 	@Override
 	public void run(final KillCountConfiguration arg0, final Environment env) throws Exception {
 		final MongoClientURI mongoUri = new MongoClientURI(
-				System.getenv("MONGO_URL"));
+				System.getenv(EnvVars.MONGO_URL));
 		final MongoClient mongo = new MongoClient(mongoUri);
 
-		final DB killcount = mongo.getDB(System.getenv("DB_NAME"));
+		final DB killcount = mongo.getDB(System.getenv(EnvVars.DB_NAME));
 
 		final WitchHuntResource witchHuntRes = new WitchHuntResource(killcount);
 		final DemocideResource demoCideRes = new DemocideResource(killcount);

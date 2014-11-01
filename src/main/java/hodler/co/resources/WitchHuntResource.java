@@ -1,6 +1,7 @@
 package hodler.co.resources;
 
 import hodler.co.model.EntityInfos;
+import hodler.co.utils.Collections;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class WitchHuntResource {
 	private final DBCollection col;
 
 	public WitchHuntResource(final DB db) throws UnknownHostException {
-		col = db.getCollection("witchhunts");
+		col = db.getCollection(Collections.WITCH_HUNTS);
 	}
 
 	@GET
