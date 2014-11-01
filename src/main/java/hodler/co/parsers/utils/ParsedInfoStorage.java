@@ -1,5 +1,6 @@
 package hodler.co.parsers.utils;
 
+import hodler.co.model.EntityInfos;
 import hodler.co.model.Genocide;
 import hodler.co.model.SerialKiller;
 import hodler.co.model.TerroristAttack;
@@ -57,6 +58,13 @@ public class ParsedInfoStorage {
 					.append("ideology", attack.getIdeology())
 					.append("event", attack.getEntityInfos().getEvent())
 					.append("link", attack.getWikipediaLink()));
+		}
+	}
+
+	public void storeWorldWarTwoCasualties(final List<EntityInfos> infos) {
+		for (final EntityInfos info : infos) {
+			col.insert(new BasicDBObject("region", info.getRegion()).append("lowestCasualties",
+					info.getLowestCasualties()));
 		}
 	}
 }
