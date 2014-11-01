@@ -3,16 +3,17 @@ package hodler.co.model;
 import javax.validation.constraints.NotNull;
 
 
-public class Infos {
+public class EntityInfos {
 
 	private String id;
 	private String event;
 	private String region;
+
 	private int lowestCasualties;
 	@NotNull
 	private int highestCasualties;
 
-	public Infos() {
+	public EntityInfos() {
 
 	}
 
@@ -45,7 +46,7 @@ public class Infos {
 	}
 
 	public void setLowestCasualties(final int lowestEstimateCasualties) {
-		this.lowestCasualties = lowestEstimateCasualties;
+		lowestCasualties = lowestEstimateCasualties;
 	}
 
 	public int getHighestCasualties() {
@@ -53,6 +54,7 @@ public class Infos {
 	}
 
 	public void setHighestCasualties(final int highestEstiamteCasualties) {
-		this.highestCasualties = highestEstiamteCasualties;
+		highestCasualties = highestEstiamteCasualties;
 	}
+
 }

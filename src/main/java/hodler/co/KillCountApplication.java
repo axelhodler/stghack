@@ -1,6 +1,7 @@
 package hodler.co;
 
 import hodler.co.resources.DemocideResource;
+import hodler.co.resources.SerialKillerResource;
 import hodler.co.resources.WitchHuntResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -32,9 +33,11 @@ public class KillCountApplication extends Application<KillCountConfiguration> {
 
 		final WitchHuntResource witchHuntRes = new WitchHuntResource(killcount);
 		final DemocideResource demoCideRes = new DemocideResource(killcount);
+		final SerialKillerResource serialKillerRes = new SerialKillerResource(killcount);
 
 		env.jersey().register(witchHuntRes);
 		env.jersey().register(demoCideRes);
+		env.jersey().register(serialKillerRes);
 	}
 
 }

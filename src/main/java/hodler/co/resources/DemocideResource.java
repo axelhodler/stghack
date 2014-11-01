@@ -1,6 +1,6 @@
 package hodler.co.resources;
 
-import hodler.co.model.Infos;
+import hodler.co.model.EntityInfos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +31,12 @@ public class DemocideResource {
 	@Path("/")
 	public Response getDemocides() {
 		final DBCursor curs = col.find();
-		final List<Infos> casualties = new ArrayList<Infos>();
+		final List<EntityInfos> casualties = new ArrayList<EntityInfos>();
 
 		while (curs.hasNext()) {
 			final DBObject dbo = curs.next();
 
-			final Infos cas = new Infos();
+			final EntityInfos cas = new EntityInfos();
 			cas.setId(dbo.get("_id").toString());
 			cas.setHighestCasualties(((Number) dbo.get("highestCasualties")).intValue());
 			if (dbo.get("lowestCasualties") != null) {
