@@ -40,14 +40,13 @@ public class WW2DeathsParser {
 			country = country.substring(0, country.length() - 1);
 			final String lastChar = (String) country.subSequence(country.length() - 1, country.length());
 
-			
 
 			String countryWithoutReferences = country;
 
 			final String upperCaseLastChar = lastChar.toUpperCase();
 			if (lastChar.equals(upperCaseLastChar)) {
 				// first end again
-				countryWithoutReferences = country.substring(0, country.length()-1);
+				countryWithoutReferences = country.substring(0, country.length() - 1);
 			}
 			// Remove braces
 			String countryWithoutBraces = countryWithoutReferences;
@@ -57,9 +56,11 @@ public class WW2DeathsParser {
 				countryWithoutBraces = countryWithoutReferences.substring(0, indexOfBraces);
 			}
 			final EntityInfos ei = new EntityInfos();
-			ei.setRegion(countryWithoutBraces);
 
-			//
+			// check if first letter is uppercase, if not cut out
+			final String countryWithoutWhitespace = countryWithoutBraces.replace(String.valueOf((char) 160), " ").trim();
+			ei.setRegion(countryWithoutWhitespace);
+
 			final String withoutComma = td.get(1).text().replace(",", "");
 			final int lastIndexOfBrace = withoutComma.lastIndexOf("[");
 			String withoutReference = withoutComma;
