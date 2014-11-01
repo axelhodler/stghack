@@ -2,10 +2,7 @@ package hodler.co;
 
 import hodler.co.resources.GenocideResource;
 import hodler.co.resources.SerialKillerResource;
-<<<<<<< HEAD
 import hodler.co.resources.TerroristAttacksResource;
-=======
->>>>>>> 933c4ff9aa03469c0bd7de0220bf3eb633a864b8
 import hodler.co.resources.WitchHuntResource;
 import hodler.co.utils.EnvVars;
 import io.dropwizard.Application;
