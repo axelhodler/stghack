@@ -1,6 +1,6 @@
 package hodler.co;
 
-import hodler.co.resources.DemocideResource;
+import hodler.co.resources.GenocideResource;
 import hodler.co.resources.SerialKillerResource;
 import hodler.co.resources.WitchHuntResource;
 import hodler.co.utils.EnvVars;
@@ -33,7 +33,7 @@ public class KillCountApplication extends Application<KillCountConfiguration> {
 		final DB killcount = mongo.getDB(System.getenv(EnvVars.DB_NAME));
 
 		final WitchHuntResource witchHuntRes = new WitchHuntResource(killcount);
-		final DemocideResource demoCideRes = new DemocideResource(killcount);
+		final GenocideResource demoCideRes = new GenocideResource(killcount);
 		final SerialKillerResource serialKillerRes = new SerialKillerResource(killcount);
 
 		env.jersey().register(witchHuntRes);

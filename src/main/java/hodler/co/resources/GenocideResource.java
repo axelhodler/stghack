@@ -1,6 +1,9 @@
 package hodler.co.resources;
 
 import hodler.co.model.EntityInfos;
+import hodler.co.model.Genocide;
+import hodler.co.model.HistoricalRange;
+import hodler.co.utils.Collections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,23 +22,24 @@ import com.mongodb.DBObject;
 
 @Path("/genocides")
 @Produces(MediaType.APPLICATION_JSON)
-public class DemocideResource {
+public class GenocideResource {
 
 	private final DBCollection col;
 
-	public DemocideResource(final DB db) {
-		col = db.getCollection("genocides");
+	public GenocideResource(final DB db) {
+		col = db.getCollection(Collections.GENOCIDES);
 	}
 
 	@GET
 	@Path("/")
 	public Response getDemocides() {
 		final DBCursor curs = col.find();
-		final List<EntityInfos> casualties = new ArrayList<EntityInfos>();
+		final List<Genocide> casualties = new ArrayList<Genocide>();
 
 		while (curs.hasNext()) {
 			final DBObject dbo = curs.next();
 
+			final Genocide gc = new Genocide();
 			final EntityInfos cas = new EntityInfos();
 			cas.setId(dbo.get("_id").toString());
 			cas.setHighestCasualties(((Number) dbo.get("highestCasualties")).intValue());
@@ -43,8 +47,15 @@ public class DemocideResource {
 				cas.setLowestCasualties(((Number) dbo.get("lowestCasualties")).intValue());
 			}
 			cas.setRegion(dbo.get("region").toString());
+			cas.setEvent(dbo.get("event").toString());
 
-			casualties.add(cas);
+			gc.setInfos(cas);
+			gc.setTimeRange(new HistoricalRange(
+					Integer.parseInt(dbo.get("from").toString()),
+					Integer.parseInt(dbo.get("to").toString())));
+			gc.setWikipediaLink(dbo.get("link").toString());
+
+			casualties.add(gc);
 		}
 
 		return Response.ok().header("Access-Control-Allow-Origin", "*").entity(casualties).build();

@@ -1,5 +1,6 @@
 package hodler.co.parsers;
 
+import hodler.co.model.Genocide;
 import hodler.co.model.SerialKiller;
 import hodler.co.utils.EnvVars;
 
@@ -32,6 +33,18 @@ public class ParsedInfoStorage {
 					.append("lowestCasualties", k.getInfos().getLowestCasualties())
 					.append("yearsActive", k.getYearsActive()).append("name", k.getName())
 					.append("link", k.getWikipediaLink()));
+		}
+	}
+
+	public void storeGenocides(final List<Genocide> genocides) {
+		for (final Genocide gc : genocides) {
+			col.insert(new BasicDBObject("region", gc.getInfos().getRegion())
+					.append("lowestCasualties", gc.getInfos().getLowestCasualties())
+					.append("highestCasualties", gc.getInfos().getHighestCasualties())
+					.append("from", gc.getTimeRange().getFrom())
+					.append("to", gc.getTimeRange().getTo())
+					.append("event", gc.getInfos().getEvent())
+					.append("link", gc.getWikipediaLink()));
 		}
 	}
 }
