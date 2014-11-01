@@ -43,7 +43,7 @@ public class TerrorismParser {
 			final EntityInfos ei = new EntityInfos();
 			ei.setLowestCasualties(
 					Integer.parseInt(td.get(0).text().replace(",", "")
-					.replace("+", "")));
+							.replace("+", "")));
 			ei.setEvent(td.get(1).text());
 			ta.setWikipediaLink("http://en.wikipedia.org" + td.get(1).getElementsByTag("a").attr("href"));
 			ta.setIdeology(td.get(2).text());
@@ -53,10 +53,10 @@ public class TerrorismParser {
 			ta.setEntityInfos(ei);
 
 			terroristAttacksList.add(ta);
-
-			final ParsedInfoStorage ps = new ParsedInfoStorage(Collections.TERRORIST_ATTACKS);
-			ps.storeTerroristAttacks(terroristAttacksList);
 		}
+
+		final ParsedInfoStorage ps = new ParsedInfoStorage(Collections.TERRORIST_ATTACKS);
+		ps.storeTerroristAttacks(terroristAttacksList);
 	}
 
 }
