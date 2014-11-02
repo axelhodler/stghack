@@ -9,4 +9,5 @@ public final class Collections {
 	public static final String GENOCIDES = "genocides";
 	public static final String TERRORIST_ATTACKS = "terroristattacks";
 	public static final String WW2_CASUALTIES = "ww2casualties";
+	public static final String IRAQ_WAR_CASUALTIES = "iraqWarCasualties";
 }

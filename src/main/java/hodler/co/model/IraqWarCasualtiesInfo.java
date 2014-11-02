@@ -2,12 +2,21 @@ package hodler.co.model;
 
 public class IraqWarCasualtiesInfo {
 
+	private String id;
 	private int casualties;
 	private int year;
 	private String faction;
 
 	public IraqWarCasualtiesInfo() {
 
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(final String id) {
+		this.id = id;
 	}
 
 	public int getCasualties() {
